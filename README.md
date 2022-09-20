@@ -46,8 +46,6 @@ I would like my bank statement to include the balance after each transaction.
 
 ## Classes:
 
-bank: where the user interact with the program;
-userAccount: account balance, list of transactions, new transactions(deposit, withdraw);
-transaction: details of transactions (type, amount, balance, date);
-printStatement: takes the array of transactions and format them into a string output;
+- Account: 
+- Transactions: deposit, withdraw;
 <!-- format: -->
