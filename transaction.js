@@ -3,10 +3,10 @@ const moment = require('moment')
 
 class Transaction {
  
-  constructor(amount, action, balance){
+  constructor(amount, type, balance){
     this.date = moment(new Date()).format("DD/MM/YYYY");
     this.amount = parseFloat(amount).toFixed(2);
-    this.action = action;
+    this.type = type;
     this.balance = parseFloat(balance).toFixed(2);
   }
 

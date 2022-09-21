@@ -69,8 +69,8 @@ describe('Account', () => {
     account.withdraw(100);
 
     expect(account.transactionLog.length).toEqual(2);
-    expect(account.transactionLog[0].action).toEqual("credit");
-    expect(account.transactionLog[1].action).toEqual("debit");
+    expect(account.transactionLog[0].type).toEqual("credit");
+    expect(account.transactionLog[1].type).toEqual("debit");
     expect(account.transactionLog[0].date).toEqual(todayDate)
     expect(account.transactionLog[1].date).toEqual(todayDate)
 

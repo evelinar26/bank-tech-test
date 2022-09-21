@@ -46,6 +46,14 @@ I would like my bank statement to include the balance after each transaction.
 
 ## Classes:
 
-- Account: 
-- Transactions: deposit, withdraw;
-<!-- format: -->
+- Transaction: this class holds the defining elements of each transactions. Each of them will have a date (for this one, I've used the JS library 'moment'), type of action, an amount(formatted to have 2 decimals) and, balance;
+
+- Account: This is the class where the user can interact with the bank. This class has getBalance, deposit, withdraw and printStatement methods, allowing the user to perform all actions as required.
+
+
+## Approach
+
+- After reviewing the requirements and acceptance criteria, I broke down both into User Stories.
+I used the User Stories to diagram the classes I wanted to use. 
+I used TDD and Node to interact with the code.
+With more time, I would have probably added a class for formatting elements (numbers, date and currency), so that, if needed, all of them can be easily changed.

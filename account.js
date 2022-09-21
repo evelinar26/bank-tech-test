@@ -4,7 +4,6 @@ const Transaction = require('./transaction')
 class Account {
   constructor () {
     this.balance = 0
-    // this.transaction = new transactions
     this.transactionLog = []
   }
 
@@ -36,12 +35,12 @@ class Account {
   printStatement() {
     let statement = ""
     statement += "date || credit || debit || balance\n"
-    this.transactionLog.forEach(element => {
-      if (element.action == 'debit'){
-        statement += element.date + " || || " + element.amount + " || " + element.balance + "\n";
+    this.transactionLog.forEach(transaction => {
+      if (transaction.type == 'debit'){
+        statement += transaction.date + " || || " + transaction.amount + " || " + transaction.balance + "\n";
       }
       else {
-        statement += element.date + " || " + element.amount + " || || " + element.balance + "\n"
+        statement += transaction.date + " || " + transaction.amount + " || || " + transaction.balance + "\n"
       }
     })
     return statement;
