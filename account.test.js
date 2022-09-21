@@ -1,12 +1,5 @@
 const Account = require('./account');
 
-// let user1 = new Account();
-
-// user1.deposit(-2000);
-// user1.deposit(500);
-// user1.withdraw(200);
-// user1.printStatement();
-
 describe('Account', () => {
   let account;
 
@@ -24,6 +17,14 @@ describe('Account', () => {
     expect(account.getBalance()).toEqual(1000)
   });
 
+  it('Should return an error message if deposit amount is negative', () => {
+    account.deposit(-200)
+
+    expect(account.deposit(-200)).toEqual(
+      "Error, deposit amount cannot be negative"
+    )
+  });
+
   it('Should allow a user to withdraw money from their account', () => {
     account.deposit(1000);
     account.withdraw(500);
@@ -31,38 +32,58 @@ describe('Account', () => {
     expect(account.getBalance()).toEqual(500);
   });
 
-//   it('Should return a message with amount deposited and remaining balance', () => {
-//     account.deposit(200)
+  it('Should return an error message if withdraw amount is bigger than balance', () => {
+    account.deposit(1000);
+    account.withdraw(2000);
 
-//     expect(account.deposit(800)).toEqual(
-//       " 800.00 deposited. Current balance: 1000.00 "
-//     )
-//   });
+    expect(account.withdraw(2000)).toEqual(
+      "Amount exceeds account balance"
+    )
+  });
 
-//   it('Should return a message with amount withdrawn and remaining balance', () => {
-//     account.deposit(1000);
+  it('Should return a message with amount withdrawn and remaining balance', () => {
+    account.deposit(850.98);
 
-//     expect(account.withdraw(500)).toEqual(
-//       " 500.00 withdrawn. Current balance: 500.00 "
-//     )
-//   });
+    expect(account.withdraw(200)).toEqual(
+      "200 withdrawn. Current balance: 650.98"
+    )
+  });
 
-//   it('Should return message if user tries to withdraw more than they have', () => {
-//     account.add(500);
+  it('Should return a message with amount deposited and updated balance', () => {
+    account.deposit(750.98);
 
-//     expect(account.withdraw(1000)).toEqual(
-//       "Insufficient funds"
-//     );
-//   });
+    expect(account.deposit(200)).toEqual(
+      "200 deposited. Current balance: 950.98"
+    )
+  });
 
-//   test('Should add a transaction object to the transactionLog', () => {
-//     account.add(500);
-//     account.withdraw(100);
 
-//     expect(account.transactionLog.length).toEqual(2);
-//     expect(account.transactionLog[1].credit).toEqual(500);
-//     expect(account.transactionLog[1].balance).toEqual(500);
-//     expect(account.transactionLog[0].debit).toEqual(100);
-//     expect(account.transactionLog[0].balance).toEqual(400);
-//   });
-});
+  // it('Should return a balance with 2 decimals'), () => {
+  //   account.deposit(700.987)
+  // }
+
+  it('Should add a transaction to the transactionsLog', () => {
+    account.deposit(800);
+    account.withdraw(100);
+
+    expect(account.transactionsLog.length).toEqual(2);
+    expect(account.transactionsLog[0].action).toEqual("credit");
+    expect(account.transactionsLog[1].action).toEqual("debit");
+
+  });
+
+  it('Should allow user to print statement', () => {
+    account.deposit(500);
+    account.withdraw(100);
+
+    expect(account.printStatement()).toContain("21/09/2022 || 500.00 || || 500.00");
+    expect(account.printStatement()).toContain("21/09/2022 || || 100.00 || 400.00"); 
+  });
+
+  it('Should include the headers in the statement', () => {
+
+    expect(account.printStatement()).toContain(
+      "date || credit || debit || balance")
+  });
+
+})

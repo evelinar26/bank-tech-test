@@ -19,7 +19,7 @@ class Account {
     this.balance += amount;
     let transaction = new Transactions(amount,'credit',this.balance);
     this.transactionsLog.push(transaction);
-    // console.log('Deposit: ' + amount);
+    return(amount + ' deposited. Current balance: ' + this.balance);
   }
 
   withdraw(amount) {
@@ -29,20 +29,23 @@ class Account {
     this.balance -= amount
     let transaction = new Transactions(amount,'debit',this.balance);
     this.transactionsLog.push(transaction);
-    // console.log('Withdraw: ' + amount);
+    return(amount + ' withdrawn. Current balance: ' + this.balance);
   }
 
 
   printStatement() {
-    console.log("date || credit || debit || balance");
+    let statement = ""
+    statement += "date || credit || debit || balance\n"
     this.transactionsLog.forEach(element => {
       if (element.action == 'debit'){
-        return(element.date + " || || " + element.amount + " || " + element.balance);
+        statement += element.date + " || || " + element.amount + " || " + element.balance + "\n";
       }
       else {
-        return(element.date + " || " + element.amount + " ||  || " + element.balance);
+        statement += element.date + " || " + element.amount + " || || " + element.balance + "\n"
       }
-    } )
+    })
+    // console.log(statement);
+    return statement;
  
   }
 
