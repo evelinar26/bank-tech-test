@@ -56,7 +56,7 @@ I would like my bank statement to include the balance after each transaction.
 - After reviewing the requirements and acceptance criteria, I broke down both into User Stories.
 I used the User Stories to diagram the classes I wanted to use. 
 I used TDD and Node to interact with the code.
-With more time, I would have probably added a class for formatting elements (numbers, date and currency), so that, if needed, all of them can be easily changed. 
+
 
 ## Built with
 - Javascript
