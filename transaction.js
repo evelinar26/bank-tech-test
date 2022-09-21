@@ -1,7 +1,7 @@
 // details of transactions (type, amount, balance, date);
 const moment = require('moment')
 
-class Transactions {
+class Transaction {
  
   constructor(amount, action, balance){
     this.date = moment(new Date()).format("DD/MM/YYYY");
@@ -12,5 +12,5 @@ class Transactions {
 
 }
 
-module.exports = Transactions;
+module.exports = Transaction;
 

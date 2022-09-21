@@ -1,10 +1,12 @@
 const Account = require('./account');
+const moment = require('moment')
 
 describe('Account', () => {
   let account;
 
   beforeEach(() => {
     account = new Account()
+    todayDate = moment(new Date()).format("DD/MM/YYYY");
   })
 
   it('Should start with an initial balance of 0', () => {
@@ -66,9 +68,11 @@ describe('Account', () => {
     account.deposit(800);
     account.withdraw(100);
 
-    expect(account.transactionsLog.length).toEqual(2);
-    expect(account.transactionsLog[0].action).toEqual("credit");
-    expect(account.transactionsLog[1].action).toEqual("debit");
+    expect(account.transactionLog.length).toEqual(2);
+    expect(account.transactionLog[0].action).toEqual("credit");
+    expect(account.transactionLog[1].action).toEqual("debit");
+    expect(account.transactionLog[0].date).toEqual(todayDate)
+    expect(account.transactionLog[1].date).toEqual(todayDate)
 
   });
 
@@ -76,14 +80,22 @@ describe('Account', () => {
     account.deposit(500);
     account.withdraw(100);
 
-    expect(account.printStatement()).toContain("21/09/2022 || 500.00 || || 500.00");
-    expect(account.printStatement()).toContain("21/09/2022 || || 100.00 || 400.00"); 
+    expect(account.printStatement()).toContain(todayDate + " || 500.00 || || 500.00");
+    expect(account.printStatement()).toContain(todayDate + " || || 100.00 || 400.00"); 
   });
 
   it('Should include the headers in the statement', () => {
 
     expect(account.printStatement()).toContain(
       "date || credit || debit || balance")
+  });
+
+  it('Should print amounts with 2 decimals', () => {
+    account.deposit(500.978);
+    account.withdraw(100.9541);
+
+    expect(account.printStatement()).toContain(todayDate + " || 500.98 || || 500.98");
+    expect(account.printStatement()).toContain(todayDate + " || || 100.95 || 400.02"); 
   });
 
 })

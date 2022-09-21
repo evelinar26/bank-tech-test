@@ -1,11 +1,11 @@
 // userAccount: account balance, list of transactions, new transactions(deposit, withdraw);
-const Transactions = require('./transactions')
+const Transaction = require('./transaction')
 
 class Account {
   constructor () {
     this.balance = 0
     // this.transaction = new transactions
-    this.transactionsLog = []
+    this.transactionLog = []
   }
 
   getBalance () {
@@ -17,8 +17,8 @@ class Account {
       return "Error, deposit amount cannot be negative";
     } 
     this.balance += amount;
-    let transaction = new Transactions(amount,'credit',this.balance);
-    this.transactionsLog.push(transaction);
+    let transaction = new Transaction(amount,'credit',this.balance);
+    this.transactionLog.push(transaction);
     return(amount + ' deposited. Current balance: ' + this.balance);
   }
 
@@ -27,8 +27,8 @@ class Account {
       return "Amount exceeds account balance";
     } 
     this.balance -= amount
-    let transaction = new Transactions(amount,'debit',this.balance);
-    this.transactionsLog.push(transaction);
+    let transaction = new Transaction(amount,'debit',this.balance);
+    this.transactionLog.push(transaction);
     return(amount + ' withdrawn. Current balance: ' + this.balance);
   }
 
@@ -36,7 +36,7 @@ class Account {
   printStatement() {
     let statement = ""
     statement += "date || credit || debit || balance\n"
-    this.transactionsLog.forEach(element => {
+    this.transactionLog.forEach(element => {
       if (element.action == 'debit'){
         statement += element.date + " || || " + element.amount + " || " + element.balance + "\n";
       }
@@ -44,7 +44,6 @@ class Account {
         statement += element.date + " || " + element.amount + " || || " + element.balance + "\n"
       }
     })
-    // console.log(statement);
     return statement;
  
   }
