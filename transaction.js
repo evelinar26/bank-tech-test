@@ -1,4 +1,3 @@
-// details of transactions (type, amount, balance, date);
 const moment = require('moment')
 
 class Transaction {
@@ -9,7 +8,7 @@ class Transaction {
     this.type = type;
     this.balance = parseFloat(balance).toFixed(2);
   }
-
+ 
 }
 
 module.exports = Transaction;

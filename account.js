@@ -1,4 +1,3 @@
-// userAccount: account balance, list of transactions, new transactions(deposit, withdraw);
 const Transaction = require('./transaction')
 
 class Account {
@@ -46,7 +45,6 @@ class Account {
     return statement;
  
   }
-
 };
 
 module.exports = Account

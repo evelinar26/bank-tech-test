@@ -60,10 +60,6 @@ describe('Account', () => {
   });
 
 
-  // it('Should return a balance with 2 decimals'), () => {
-  //   account.deposit(700.987)
-  // }
-
   it('Should add a transaction to the transactionsLog', () => {
     account.deposit(800);
     account.withdraw(100);
